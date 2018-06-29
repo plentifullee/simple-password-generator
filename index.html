@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <title>Simple Random Password Generator</title>
+    <style>
+    	body {
+    		margin-top: 50px;
+    	}
+    </style>
+  </head>
+  <body>
+    
+    <div class="container">
+    	<div class="row">
+    		<div class="col-6">
+    			<!-- <h1>Hello, world!</h1> -->
+    			<form>
+					  <div class="form-group">
+					    <label for="input_num_chars">Number of characters</label>
+					    <input type="text" class="form-control" id="input_num_chars" aria-describedby="numberOfChars" placeholder="Enter number of characters" value="14">
+					  </div>
+					  <div class="form-group form-check">
+					    <input type="checkbox" class="form-check-input" id="caseCheck" checked>
+					    <label class="form-check-label" for="caseCheck">Use uppercase and lowercase</label>
+					  </div>
+					  <div class="form-group form-check">
+					    <input type="checkbox" class="form-check-input" id="numCheck" checked>
+					    <label class="form-check-label" for="numCheck">Also include numbers</label>
+					  </div>
+					</form>
+					<button id="generate_btn" class="btn btn-primary">Generate</button>
+    			
+    		</div>
+    		<div class="col-6 text-center" id="password_results"></div>
+    	</div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+    <script>
+    	$('#generate_btn').click(function(){
+    		var num_chars = $('#input_num_chars').val();
+    		var case_sense = $('#caseCheck').prop("checked");
+    		var use_num = $('#numCheck').prop("checked");
+    		$('#password_results').html("<h1>"+passwordGenerator(num_chars, case_sense, use_num)+"</h1>");
+    	});
+
+    	function passwordGenerator(nc, cs, un) {
+    		var password = "";
+    		var randomString = "abcdefghijklmnopqrstuvwxyz";
+    		if(cs == true) {
+    			randomString += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    		}
+    		if(un == true) {
+    			randomString += "1234567890";
+    		}
+    		for (var i = 0; i < nc; i++) {
+    			password += randomString.charAt(Math.floor(Math.random() * randomString.length));
+    		}
+
+    		return password;
+    	}
+    	
+    </script>
+  </body>
+</html>
